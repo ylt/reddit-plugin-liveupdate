@@ -158,7 +158,7 @@ class LiveUpdateEventAppPage(LiveUpdateEventPage):
             "image": static("liveupdate-logo.png"),
             "image:width": "300",
             "image:height": "300",
-            "site_name": g.short_description,
+            "site_name": "reddit",
             "ttl": "600",  # have this stuff re-fetched frequently
         }
 
@@ -180,7 +180,7 @@ class LiveUpdateEventFocusPage(LiveUpdateEventPage):
             "image": static("liveupdate-logo.png"),
             "image:width": "300",
             "image:height": "300",
-            "site_name": g.short_description,
+            "site_name": "reddit",
         }
 
         LiveUpdateEventPage.__init__(
