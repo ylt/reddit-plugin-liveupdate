@@ -5,6 +5,7 @@ import pytz
 from pylons import app_globals as g
 from pycassa.cassandra.ttypes import NotFoundException
 
+from reddit_liveupdate.controllers import close_event
 from reddit_liveupdate.models import LiveUpdateEvent, LiveUpdateStream
 
 
@@ -40,5 +41,4 @@ def close_abandoned_threads():
 
         if event_last_modified < horizon:
             g.log.warning("Closing %s for inactivity.", event._id)
-            event.state = "complete"
-            event._commit()
+            close_event(event)
