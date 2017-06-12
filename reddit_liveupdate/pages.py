@@ -466,13 +466,19 @@ class LiveUpdateOtherDiscussions(Templated):
     @classmethod
     @memoize("live_update_discussion_ids", time=60)
     def _get_related_link_ids(cls, event_id):
-        url = make_event_url(c.liveupdate_event._id)
+        url = make_event_url(c.liveupdate_event._id).rtrim("/")
+        links = []
 
         try:
-            links = tup(Link._by_url(url, sr=None))
+            links.extend(tup(Link._by_url(url, sr=None)))
         except NotFound:
-            links = []
-
+            pass
+        
+        try:
+            links.extend(tup(Link._by_url(url + "/", sr=None)))
+        except NotFound:
+            pass
+        
         return [link._id for link in links]
 
     @classmethod
